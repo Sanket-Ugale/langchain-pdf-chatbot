@@ -11,3 +11,4 @@ requests
 uvicorn
 fastapi
 langchain-community
+pypdf
