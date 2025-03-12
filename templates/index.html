@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application with PDF</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>PDF Chat Application</h1>
+        <div id="uploadStatus"></div>
+        
+        <div class="chat-container">
+            <div id="chatBox" class="chat-box"></div>
+            
+            <div class="input-container">
+                <form id="chatForm" class="input-wrapper">
+                    <div class="file-input-wrapper">
+                        <div class="file-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M13.5,16V19H10.5V16H8L12,12L16,16H13.5M13,9V3.5L18.5,9H13Z" />
+                            </svg>
+                        </div>
+                        <input type="file" name="pdf" accept="application/pdf" id="fileInput">
+                    </div>
+                    
+                    <input type="text" id="prompt" class="message-input" placeholder="Type your message..." autocomplete="off" required>
+                    
+                    <button type="submit" class="send-button" id="sendButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
