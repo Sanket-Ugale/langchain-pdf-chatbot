@@ -12,3 +12,6 @@ uvicorn
 fastapi
 langchain-community
 pypdf
+requests
+transformers
+sentence-transformers
