@@ -7,6 +7,10 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import Qdrant
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 UPLOAD_FOLDER = './uploads'
@@ -15,8 +19,9 @@ if not os.path.exists(UPLOAD_FOLDER):
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Qdrant configuration
-QDRANT_URL = "http://192.168.1.21:6333/"
-COLLECTION_NAME = "pdf_chunks"
+FLASK_ENV = os.getenv("FLASK_ENV")
+LLM_API_URL = os.getenv("LLM_API_URL")
+QDRANT_URL = os.getenv("QDRANT_URL")
 vectorstore = None  # Global variable to hold our Qdrant vector store
 
 @app.route('/')
@@ -68,7 +73,7 @@ def stream_llm_response(prompt):
     }
 
     # Call the local LLM API with streaming enabled
-    response = requests.post("http://localhost:8080/v1/chat/completions", json=payload, stream=True)
+    response = requests.post(LLM_API_URL, json=payload, stream=True)
 
     # Process each streamed line: extract only the "content" field and yield it.
     for line in response.iter_lines(decode_unicode=True):
@@ -96,4 +101,4 @@ def chat():
     return Response(stream_llm_response(prompt), mimetype="text/event-stream")
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=os.getenv("DEBUG"), port=os.getenv("PORT"))
