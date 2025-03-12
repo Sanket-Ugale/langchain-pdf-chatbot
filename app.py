@@ -101,4 +101,4 @@ def chat():
     return Response(stream_llm_response(prompt), mimetype="text/event-stream")
 
 if __name__ == '__main__':
-    app.run(debug=os.getenv("DEBUG"), port=os.getenv("PORT"))
+    app.run(host='0.0.0.0', debug=os.getenv("DEBUG"), port=int(os.getenv("PORT", 5000)))
